@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <app-header v-on:pass="logText" />
+      <app-content v-on:numberEvent="numberText" />
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var appContent = {
+        template: "<button v-on:click='numberPass'>add number</button>",
+        methods: {
+          numberEvent: function () {
+            this.$emit("numberPass");
+          },
+        },
+      };
+      var appHeader = {
+        template: "<button v-on:click='passEvent'>click</button>",
+        methods: {
+          passEvent: function () {
+            this.$emit("pass");
+          },
+        },
+      };
+      new Vue({
+        el: "#app",
+        components: {
+          "app-header": appHeader,
+          "app-content": appContent,
+        },
+        methods: {
+          logText: function () {
+            console.log("text");
+          },
+          numberText: function () {
+            console.log("add number");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
