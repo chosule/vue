@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-input v-model="inputText"></app-input>
+        <p>{{inputText}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var Input = {
+            props:[inputText],
+            template:'<input type="text" :value="value" @input="$emit(\'input\',$event.target.value)"/>'
+        }
+        new Vue({
+            el:"#app",
+            components:{
+                'app-input':Input
+            },
+            data:{
+                inputText:""
+            }
+        })
+    </script>
+</body>
+</html>

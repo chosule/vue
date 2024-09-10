@@ -7,42 +7,40 @@
   </head>
   <body>
     <div id="app">
-      <app-header v-on:pass="logText" />
-      <app-content v-on:numberEvent="numberText" />
+      <app-header v-vind:propsdata="num"></app-header>
+      <app-content v-on:content-pass="contentText"></app-content>
+      <p>{{str}}</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-      var appContent = {
-        template: "<button v-on:click='numberPass'>add number</button>",
-        methods: {
-          numberEvent: function () {
-            this.$emit("numberPass");
-          },
-        },
-      };
       var appHeader = {
-        template: "<button v-on:click='passEvent'>click</button>",
-        methods: {
-          passEvent: function () {
-            this.$emit("pass");
-          },
-        },
-      };
-      new Vue({
-        el: "#app",
-        components: {
-          "app-header": appHeader,
-          "app-content": appContent,
-        },
-        methods: {
-          logText: function () {
-            console.log("text");
-          },
-          numberText: function () {
-            console.log("add number");
-          },
-        },
-      });
+        template:'<div>{{num}}</div>',
+        props:['propsdata']
+      }
+      var appContent = {
+        template:'<div><button v-on:click="contentClick">{{num}}</button></div>',
+        methods:{
+          contentClick:function(){
+            this.$emit("content-pass",10)
+          }
+        }
+      }
+     new Vue({
+      el:"#app",
+      components:{
+        "app-header":appHeader,
+        "app-content":appContent
+      },
+      methods:{
+        contentText:function(num){
+          this.num = num + 1 
+          console.log("content text!!")
+        }
+      },
+      data:{
+        num:0
+      }
+     })
     </script>
   </body>
 </html>
